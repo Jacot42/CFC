@@ -12,7 +12,7 @@
       padding: 0;
     }
     header {
-      background: linear-gradient(90deg, #1abc9c, #16a085); /* bandeau vert stylé */
+      background: linear-gradient(90deg, #1abc9c, #16a085);
       color: #fff;
       text-align: center;
       padding: 20px;
@@ -80,10 +80,13 @@
 <body>
   <header>
     <h1>Demande de Visuel – Camion de Course</h1>
-    <p>Bandeau visuel pour inspiration – Assetto Corsa</p>
+    <p>Formulaire à compléter. Une fois validé, il sera transmis directement à Jacot et Dylan.</p>
   </header>
 
-  <form id="camionForm">
+  <form id="camionForm" name="demande-visuel-camion" method="POST" data-netlify="true" enctype="multipart/form-data">
+    
+    <input type="hidden" name="form-name" value="demande-visuel-camion" />
+
     <label>Nom et prénom du pilote</label>
     <input type="text" name="nom_prenom" placeholder="Ex: Jean Dupont" required>
 
@@ -116,7 +119,7 @@
     <input type="color" name="couleur2" value="#16a085">
 
     <label>Camion</label>
-    <select name="camion" id="camionSelect">
+    <select name="camion" id="camionSelect" required>
       <option value="">-- Sélectionnez --</option>
       <option value="buggyra_freightliner">Buggyra Freightliner</option>
       <option value="daf">DAF</option>
@@ -135,12 +138,12 @@
     </select>
 
     <div class="camion-preview">
-      <img id="preview" src="" alt="Aperçu camion" />
+      <img id="preview" src="" alt="Aperçu camion" style="display:none;" />
     </div>
 
     <div class="checkbox-group">
-      <input type="checkbox" name="logos" id="logosCheck">
-      <label for="logosCheck">
+      <input type="checkbox" name="acceptation_logos" id="logosCheck">
+      <label for="logosCheck" style="display:inline;">
         J’accepte l’intégration de deux logos partenaires si décoration personnalisée
       </label>
       <div style="margin-top:10px;">
@@ -150,7 +153,7 @@
     </div>
 
     <label>Ajouter vos images / inspirations</label>
-    <input type="file" name="images" multiple accept="image/*">
+    <input type="file" name="inspirations" multiple accept="image/*">
 
     <p style="margin-top:20px; font-size:0.9em; color:#ccc;">
       Ce formulaire est une première ébauche. Je prendrai contact avec vous pour finaliser le visuel proprement.
@@ -184,19 +187,24 @@
       const val = camionSelect.value;
       if(camionImages[val]){
         preview.src = camionImages[val];
+        preview.style.display = "inline-block";
       } else {
         preview.src = "";
+        preview.style.display = "none";
       }
     });
 
-    document.getElementById("camionForm").addEventListener("submit", e => {
-      e.preventDefault();
+    // Gestion de la soumission
+    document.getElementById("camionForm").addEventListener("submit", function(e) {
       const logosCheck = document.getElementById("logosCheck");
+      
       if(!logosCheck.checked){
+        e.preventDefault(); // Empêche l'envoi vers Netlify
         alert("Vous devez accepter l'intégration des deux logos pour envoyer la demande.");
         return;
       }
-      alert("Formulaire envoyé !\n(Récupération via script ou email à configurer)");
+      
+      // Si ok, on ne fait pas de e.preventDefault(), on laisse Netlify gérer la suite !
     });
   </script>
 </body>
