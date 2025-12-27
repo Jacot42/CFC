@@ -4,77 +4,19 @@
   <meta charset="UTF-8">
   <title>Demande Visuel Camion - Assetto Corsa</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #111;
-      color: #eee;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background: linear-gradient(90deg, #1abc9c, #16a085);
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2em;
-    }
-    form {
-      max-width: 800px;
-      margin: 30px auto;
-      padding: 20px;
-      background-color: #222;
-      border-radius: 10px;
-    }
-    label {
-      display: block;
-      margin-top: 15px;
-      font-weight: bold;
-    }
-    input, select, textarea {
-      width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      border-radius: 5px;
-      border: none;
-      font-size: 1em;
-    }
-    input[type="color"] {
-      width: 50px;
-      padding: 0;
-    }
-    .camion-preview {
-      text-align: center;
-      margin-top: 20px;
-    }
-    .camion-preview img {
-      max-width: 100%;
-      height: auto;
-      border: 2px solid #555;
-      border-radius: 10px;
-    }
-    .checkbox-group {
-      margin-top: 15px;
-    }
-    .checkbox-group img {
-      height: 50px;
-      margin-right: 10px;
-    }
-    .submit-btn {
-      background-color: #1abc9c;
-      color: #fff;
-      padding: 10px 20px;
-      font-size: 1.2em;
-      border: none;
-      border-radius: 5px;
-      margin-top: 20px;
-      cursor: pointer;
-    }
-    .submit-btn:hover {
-      background-color: #16a085;
-    }
+    body { font-family: Arial, sans-serif; background-color: #111; color: #eee; margin: 0; padding: 0; }
+    header { background: linear-gradient(90deg, #1abc9c, #16a085); color: #fff; text-align: center; padding: 20px; }
+    header h1 { margin: 0; font-size: 2em; }
+    form { max-width: 800px; margin: 30px auto; padding: 20px; background-color: #222; border-radius: 10px; }
+    label { display: block; margin-top: 15px; font-weight: bold; }
+    input, select, textarea { width: 100%; padding: 8px; margin-top: 5px; border-radius: 5px; border: none; font-size: 1em; }
+    input[type="color"] { width: 50px; padding: 0; }
+    .camion-preview { text-align: center; margin-top: 20px; }
+    .camion-preview img { max-width: 100%; height: auto; border: 2px solid #555; border-radius: 10px; }
+    .checkbox-group { margin-top: 15px; }
+    .checkbox-group img { height: 50px; margin-right: 10px; }
+    .submit-btn { background-color: #1abc9c; color: #fff; padding: 10px 20px; font-size: 1.2em; border: none; border-radius: 5px; margin-top: 20px; cursor: pointer; width: 100%; }
+    .submit-btn:hover { background-color: #16a085; }
   </style>
 </head>
 <body>
@@ -83,7 +25,7 @@
     <p>Formulaire à compléter. Une fois validé, il sera transmis directement à Jacot et Dylan.</p>
   </header>
 
-  <form id="camionForm" name="demande-visuel-camion" method="POST" data-netlify="true" enctype="multipart/form-data">
+  <form id="camionForm" name="demande-visuel-camion" method="POST" data-netlify="true" enctype="multipart/form-data" action="/success.html">
     
     <input type="hidden" name="form-name" value="demande-visuel-camion" />
 
@@ -144,7 +86,7 @@
     <div class="checkbox-group">
       <input type="checkbox" name="acceptation_logos" id="logosCheck">
       <label for="logosCheck" style="display:inline;">
-        J’accepte l’intégration de deux logos partenaires si décoration personnalisée
+        J’accepte l’intégration de deux logos partenaires
       </label>
       <div style="margin-top:10px;">
         <img src="images/Jacot.png" alt="Logo Jacot">
@@ -155,17 +97,12 @@
     <label>Ajouter vos images / inspirations</label>
     <input type="file" name="inspirations" multiple accept="image/*">
 
-    <p style="margin-top:20px; font-size:0.9em; color:#ccc;">
-      Ce formulaire est une première ébauche. Je prendrai contact avec vous pour finaliser le visuel proprement.
-    </p>
-
     <button type="submit" class="submit-btn">Envoyer la demande</button>
   </form>
 
   <script>
     const camionSelect = document.getElementById("camionSelect");
     const preview = document.getElementById("preview");
-
     const camionImages = {
       "buggyra_freightliner": "images/buggyra_freightliner.png",
       "daf": "images/daf.png",
@@ -189,22 +126,15 @@
         preview.src = camionImages[val];
         preview.style.display = "inline-block";
       } else {
-        preview.src = "";
         preview.style.display = "none";
       }
     });
 
-    // Gestion de la soumission
     document.getElementById("camionForm").addEventListener("submit", function(e) {
-      const logosCheck = document.getElementById("logosCheck");
-      
-      if(!logosCheck.checked){
-        e.preventDefault(); // Empêche l'envoi vers Netlify
-        alert("Vous devez accepter l'intégration des deux logos pour envoyer la demande.");
-        return;
+      if(!document.getElementById("logosCheck").checked){
+        e.preventDefault();
+        alert("Vous devez accepter l'intégration des deux logos.");
       }
-      
-      // Si ok, on ne fait pas de e.preventDefault(), on laisse Netlify gérer la suite !
     });
   </script>
 </body>
