@@ -17,12 +17,14 @@
     .checkbox-group img { height: 50px; margin-right: 10px; }
     .submit-btn { background-color: #1abc9c; color: #fff; padding: 10px 20px; font-size: 1.2em; border: none; border-radius: 5px; margin-top: 20px; cursor: pointer; width: 100%; }
     .submit-btn:hover { background-color: #16a085; }
+    .file-inputs { background-color: #333; padding: 15px; border-radius: 5px; margin-top: 10px; }
+    .file-inputs input { margin-bottom: 10px; background-color: #444; color: white; }
   </style>
 </head>
 <body>
   <header>
     <h1>Demande de Visuel – Camion de Course</h1>
-    <p>Formulaire à compléter. Une fois validé, il sera transmis directement à Jacot et Dylan.</p>
+    <p>Complétez le formulaire pour transmettre votre demande à Jacot et Dylan.</p>
   </header>
 
   <form id="camionForm" name="demande-visuel-camion" method="POST" data-netlify="true" enctype="multipart/form-data" action="/success.html">
@@ -94,8 +96,14 @@
       </div>
     </div>
 
-    <label>Ajouter vos images / inspirations</label>
-    <input type="file" name="inspirations" multiple accept="image/*">
+    <label>Ajouter vos images / inspirations (Max 5)</label>
+    <div class="file-inputs">
+      <input type="file" name="inspiration_1" accept="image/*">
+      <input type="file" name="inspiration_2" accept="image/*">
+      <input type="file" name="inspiration_3" accept="image/*">
+      <input type="file" name="inspiration_4" accept="image/*">
+      <input type="file" name="inspiration_5" accept="image/*">
+    </div>
 
     <button type="submit" class="submit-btn">Envoyer la demande</button>
   </form>
