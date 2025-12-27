@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Demande Visuel Camion - Assetto Corsa</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #eee;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: linear-gradient(90deg, #1abc9c, #16a085); /* bandeau vert stylé */
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2em;
+    }
+    form {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #222;
+      border-radius: 10px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: none;
+      font-size: 1em;
+    }
+    input[type="color"] {
+      width: 50px;
+      padding: 0;
+    }
+    .camion-preview {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .camion-preview img {
+      max-width: 100%;
+      height: auto;
+      border: 2px solid #555;
+      border-radius: 10px;
+    }
+    .checkbox-group {
+      margin-top: 15px;
+    }
+    .checkbox-group img {
+      height: 50px;
+      margin-right: 10px;
+    }
+    .submit-btn {
+      background-color: #1abc9c;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 5px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    .submit-btn:hover {
+      background-color: #16a085;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Demande de Visuel – Camion de Course</h1>
+    <p>Bandeau visuel pour inspiration – Assetto Corsa</p>
+  </header>
+
+  <form id="camionForm">
+    <label>Nom et prénom du pilote</label>
+    <input type="text" name="nom_prenom" placeholder="Ex: Jean Dupont" required>
+
+    <label>Pays</label>
+    <input type="text" name="pays" required>
+
+    <label>Équipe</label>
+    <input type="text" name="equipe" required>
+
+    <label>Numéro</label>
+    <input type="text" name="numero" maxlength="3">
+
+    <label>Groupe sanguin</label>
+    <select name="groupe">
+      <option value="">-- Sélectionnez --</option>
+      <option value="A+">A+</option>
+      <option value="A-">A-</option>
+      <option value="B+">B+</option>
+      <option value="B-">B-</option>
+      <option value="AB+">AB+</option>
+      <option value="AB-">AB-</option>
+      <option value="O+">O+</option>
+      <option value="O-">O-</option>
+    </select>
+
+    <label>Couleur principale</label>
+    <input type="color" name="couleur1" value="#1abc9c">
+
+    <label>Couleur secondaire</label>
+    <input type="color" name="couleur2" value="#16a085">
+
+    <label>Camion</label>
+    <select name="camion" id="camionSelect">
+      <option value="">-- Sélectionnez --</option>
+      <option value="buggyra_freightliner">Buggyra Freightliner</option>
+      <option value="daf">DAF</option>
+      <option value="iveco_s_way">Iveco S-Way</option>
+      <option value="iveco_s_way_pt">Iveco S-Way PT</option>
+      <option value="iveco_stralis">Iveco Stralis</option>
+      <option value="man_variante_a">MAN Variante A</option>
+      <option value="man_variante_b">MAN Variante B</option>
+      <option value="man_variante_c">MAN Variante C</option>
+      <option value="man_variante_d">MAN Variante D</option>
+      <option value="man_variante_e">MAN Variante E</option>
+      <option value="mercedes_actros">Mercedes Actros</option>
+      <option value="renault_mkr">Renault MKR</option>
+      <option value="scania">Scania</option>
+      <option value="scania_cg17">Scania CG17</option>
+    </select>
+
+    <div class="camion-preview">
+      <img id="preview" src="" alt="Aperçu camion" />
+    </div>
+
+    <div class="checkbox-group">
+      <input type="checkbox" name="logos" id="logosCheck">
+      <label for="logosCheck">
+        J’accepte l’intégration de deux logos partenaires si décoration personnalisée
+      </label>
+      <div style="margin-top:10px;">
+        <img src="images/Jacot.png" alt="Logo Jacot">
+        <img src="images/Psyko.png" alt="Logo Psyko">
+      </div>
+    </div>
+
+    <label>Ajouter vos images / inspirations</label>
+    <input type="file" name="images" multiple accept="image/*">
+
+    <p style="margin-top:20px; font-size:0.9em; color:#ccc;">
+      Ce formulaire est une première ébauche. Je prendrai contact avec vous pour finaliser le visuel proprement.
+    </p>
+
+    <button type="submit" class="submit-btn">Envoyer la demande</button>
+  </form>
+
+  <script>
+    const camionSelect = document.getElementById("camionSelect");
+    const preview = document.getElementById("preview");
+
+    const camionImages = {
+      "buggyra_freightliner": "images/buggyra_freightliner.png",
+      "daf": "images/daf.png",
+      "iveco_s_way": "images/iveco_s_way.png",
+      "iveco_s_way_pt": "images/iveco_s_way_pt.png",
+      "iveco_stralis": "images/iveco_stralis.png",
+      "man_variante_a": "images/man_variante_a.png",
+      "man_variante_b": "images/man_variante_b.png",
+      "man_variante_c": "images/man_variante_c.png",
+      "man_variante_d": "images/man_variante_d.png",
+      "man_variante_e": "images/man_variante_e.png",
+      "mercedes_actros": "images/mercedes_actros.png",
+      "renault_mkr": "images/renault_mkr.png",
+      "scania": "images/scania.png",
+      "scania_cg17": "images/scania_cg17.png"
+    };
+
+    camionSelect.addEventListener("change", () => {
+      const val = camionSelect.value;
+      if(camionImages[val]){
+        preview.src = camionImages[val];
+      } else {
+        preview.src = "";
+      }
+    });
+
+    document.getElementById("camionForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const logosCheck = document.getElementById("logosCheck");
+      if(!logosCheck.checked){
+        alert("Vous devez accepter l'intégration des deux logos pour envoyer la demande.");
+        return;
+      }
+      alert("Formulaire envoyé !\n(Récupération via script ou email à configurer)");
+    });
+  </script>
+</body>
+</html>
